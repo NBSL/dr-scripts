@@ -234,9 +234,9 @@ class EquipmentManager
         verb: 'untie',
         matches: [/^You .*#{item.short_regex}/, "^You remove.*#{item.name}", /^.*you untie your .*#{item.short_regex} from it./, '^What were you referring', '^Untie what', '^You are a little too busy'],
         failures: ['You remove', /^You are a little too busy/],
-        failure_recovery: proc {|noun, item, *matches|
-                              case matches
-                              when ["You are a little too busy"]
+        failure_recovery: proc {|noun, item, match|
+                              case match
+                              when "You are a little too busy"
                                 retreat
                                 get_item?(item);
                               else
